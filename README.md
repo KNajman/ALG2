@@ -1,3 +1,3 @@
-# ALG2-Codes
+#ALG2 Codes
 
-System.out.println("Hello World");
+<code> System.out.println("Hello World"); </code>
