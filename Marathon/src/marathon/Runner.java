@@ -1,6 +1,7 @@
 package marathon;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -8,66 +9,65 @@ import java.time.LocalTime;
  */
 public class Runner {
 
+    private static int nRunners = 999;
     private final int number;
-    private LocalTime startTime;
-    private LocalTime finishTime;    
-    
-    private int HH;
-    private int MM;
-    private int SS;
+    private double distance;
+    private LocalTime startTime = null;
+    private LocalTime finishTime = null;
 
     //construktor
-    public Runner(int number, int HH, int MM, int SS) {
-        this.number = number;
-        this.HH = HH;
-        this.MM = MM;
-        this.SS = SS;
+    public Runner(int distance) {
+        nRunners++;
+        this.number = nRunners;
+        this.distance=distance;
     }
 
-    public int[] getRunner() {
-        int[] runner = {number, HH, MM, SS};
-        return runner;
-
-    }
-
-    public int getTimeInSeconds() {
-        return 3600 * this.HH + 60 * this.MM + this.SS;
-    }
-    
-    
-    
 
     @Override
     public String toString() {
-        return "Běžec číslo: " + number + " s cilovy casem = " + HH + ":" + MM + ":" + SS;
+        DateTimeFormatter dtf =DateTimeFormatter.ofPattern("HH-mm-ss");
+        return String.format("%4d %8.3f %10s %10s", number, distance, startTime.format(dtf), finishTime.format(dtf));
     }
 
 //    public static void main(String[] args) {
 //        Runner Pavel = new Runner(1001,11,16,39);
 //        System.out.println(Pavel);
 //    }
-    public int getHH() {
-        return HH;
+    public int getNumber() {
+        return number;
     }
 
-    public void setHH(int HH) {
-        this.HH = HH;
+    public LocalTime getStartTime() {
+        //LocalTime je konstatní objekt, a tak není třeba defenzivní kopie
+        return startTime;
     }
 
-    public int getMM() {
-        return MM;
+    public LocalTime getFinishTime() {
+        return finishTime;
     }
 
-    public void setMM(int MM) {
-        this.MM = MM;
+    public void setStartTime(int HH, int MM, int SS) {
+        this.startTime = LocalTime.of(HH, MM, SS);
     }
 
-    public int getSS() {
-        return SS;
+    public void setStartTime(String time, DateTimeFormatter dtf) { //HH:MM:SS
+        this.startTime = LocalTime.parse(time, dtf);
     }
 
-    public void setSS(int SS) {
-        this.SS = SS;
+    public void setFinishTime(int HH, int MM, int SS) {
+        this.finishTime = LocalTime.of(HH, MM, SS);
+    }
+
+    public void setFinishTime(String time, DateTimeFormatter dtf) { //HH:MM:SS
+        this.finishTime = LocalTime.parse(time, dtf);
+    }
+    
+    public static void main(String[] args) {
+        DateTimeFormatter dtf =DateTimeFormatter.ofPattern("HH:mm:ss");
+        Runner r = new Runner(42);
+        r.setStartTime(2, 4, 0 );
+        r.setFinishTime("03:05:10", dtf);
+        System.out.println(r);
     }
 
 }
