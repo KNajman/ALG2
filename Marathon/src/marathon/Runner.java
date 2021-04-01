@@ -1,5 +1,6 @@
 package marathon;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,23 +17,12 @@ public class Runner {
     private LocalTime finishTime = null;
 
     //construktor
-    public Runner(int distance) {
+    public Runner(double distance) {
         nRunners++;
         this.number = nRunners;
-        this.distance=distance;
+        this.distance = distance;
     }
 
-
-    @Override
-    public String toString() {
-        DateTimeFormatter dtf =DateTimeFormatter.ofPattern("HH-mm-ss");
-        return String.format("%4d %8.3f %10s %10s", number, distance, startTime.format(dtf), finishTime.format(dtf));
-    }
-
-//    public static void main(String[] args) {
-//        Runner Pavel = new Runner(1001,11,16,39);
-//        System.out.println(Pavel);
-//    }
     public int getNumber() {
         return number;
     }
@@ -54,18 +44,47 @@ public class Runner {
         this.startTime = LocalTime.parse(time, dtf);
     }
 
-    public void setFinishTime(int HH, int MM, int SS) {
-        this.finishTime = LocalTime.of(HH, MM, SS);
+    public void setFinishTime(int HH, int mm, int ss) {
+        this.finishTime = LocalTime.of(HH, mm, ss);
     }
 
     public void setFinishTime(String time, DateTimeFormatter dtf) { //HH:MM:SS
         this.finishTime = LocalTime.parse(time, dtf);
     }
-    
+
+    public LocalTime getRunningTime() {;
+        return LocalTime.ofSecondOfDay(Duration.between(startTime, finishTime).getSeconds());
+    }
+
+    public double getAverageSpeed() {
+        return distance / getRunningTime().toSecondOfDay() * 3600;
+    }
+
+    public LocalTime averageTime1K() {
+        double time = Math.round(getRunningTime().toSecondOfDay()) / distance;
+        return LocalTime.ofSecondOfDay(time);
+    }
+
+
+    public boolean underTime(int HH, int mm, int ss) {
+        LocalTime time = LocalTime.of(HH, mm, ss); //;HH * 3600 + mm* 60 + ss
+        return getRunningTime().toSecondOfDay() <= time.toSecondOfDay();
+    }
+
+    public boolean underTime(String time, DateTimeFormatter dtf) {
+        return getRunningTime().isBefore(LocalTime.parse(time, dtf));
+    }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return String.format("%4d %8.3f %10s %10s %10s", number, distance, startTime.format(dtf), finishTime.format(dtf), getRunningTime().format(dtf));
+    }
+
     public static void main(String[] args) {
-        DateTimeFormatter dtf =DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         Runner r = new Runner(42);
-        r.setStartTime(2, 4, 0 );
+        r.setStartTime(2, 4, 0);
         r.setFinishTime("03:05:10", dtf);
         System.out.println(r);
     }
