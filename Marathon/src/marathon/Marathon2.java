@@ -5,6 +5,7 @@
  */
 package marathon;
 
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -34,7 +35,7 @@ public class Marathon2 {
         }
         for (int i = 0; i < marathon.size(); i++) {
             System.out.println(marathon.get(i).getStartTime());
-            
+
         }
         //v cili
         System.out.println("Zadej cisla a cislove casy:");
@@ -44,8 +45,49 @@ public class Marathon2 {
             HH = sc.nextInt();
             mm = sc.nextInt();
             ss = sc.nextInt();
-            Runner r = findRunner(number);
+            r = findRunner(number);
+            r.setFinishTime(HH, mm, ss);
         }
 
+        marathon.forEach(runner -> {
+            System.out.println(runner);
+        });
+
+        System.out.println(countUnderLimit("00:16:00", dtf));
+
     }
+
+    private static Runner findRunner(int number) {
+        for (int i = 0; i < marathon.size(); i++) {
+            if (marathon.get(i).getNumber() == number) {
+                return marathon.get(i);
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    private static int countUnderLimit(String time, DateTimeFormatter dtf) {
+        int count = 0;
+        for (Runner runner : marathon) {
+            if (runner.underTime(time, dtf)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static Runner fastest() {
+        LocalTime fastestTime = marathon.get(0).getRunningTime();
+        Runner fastestRunner = null;
+        for (Runner runner : marathon) {
+            if (runner.getRunningTime().isBefore(fastestTime)) {
+                fastestTime = runner.getRunningTime();
+                fastestRunner = runner;
+            }
+        }
+        return fastestRunner;
+    }
+
 }

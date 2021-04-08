@@ -62,7 +62,7 @@ public class Runner {
 
     public LocalTime averageTime1K() {
         double time = Math.round(getRunningTime().toSecondOfDay()) / distance;
-        return LocalTime.ofSecondOfDay(time);
+        return LocalTime.ofSecondOfDay((long) time);
     }
 
 
