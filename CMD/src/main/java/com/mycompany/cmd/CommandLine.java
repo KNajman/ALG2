@@ -6,6 +6,7 @@
 package com.mycompany.cmd;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -23,6 +24,8 @@ public class CommandLine {
     public String getActualDir() {
         return actualDir.getAbsolutePath();
     }
+    
+    //dir který vypíše jen nějaký datový tip
 
     public String parseAndExecute(String command) {
         String[] temp = command.trim().split(" ");
@@ -32,7 +35,7 @@ public class CommandLine {
                 rs = dir(temp);
                 break;
             case "help":
-                rs= help();
+                rs = help();
                 break;
             case "mkdir":
                 rs = mkdir(temp);
@@ -85,25 +88,26 @@ public class CommandLine {
 
     private String help() {
         StringBuilder str = new StringBuilder("");
-        str.append("help – vrátí víceřádkový textový řetězec s „nápovědou"+"\n");
-        str.append("dir – vrátí víceřádkový textový řetězec s formátovaným výpisem aktuálního adresáře"+"\n");
+        str.append("help – vrátí víceřádkový textový řetězec s „nápovědou" + "\n");
+        str.append("dir – vrátí víceřádkový textový řetězec s formátovaným výpisem aktuálního adresáře" + "\n");
         str.append("dir <adresář> – vrátí víceřádkový textový řetězec s formátovaným výpisem adresáře\n"
-                + "předaného v parametru, nemění aktuální adresář"+"\n");
-        str.append("cd <adresář> – změna aktuálního adresáře dle para"+"\n");
-        str.append("mkfile <soubor> – vytvoří nový soubor, jehož jméno bylo zadáno v parametru"+"\n");
-        str.append("mkdir <adresář> - vytvoří zadaný adresář"+"\n");
-        str.append("mkdirs <cesta> – vytvoří adresáře odpovídající cestě zadané v parametru"+"\n");
-        str.append("rename <jm1> <jm2> – přejmenuje soubor nebo adresář"+"\n");
-        str.append("exit - ukončí program"+"\n");
+                + "předaného v parametru, nemění aktuální adresář" + "\n");
+        str.append("cd <adresář> – změna aktuálního adresáře dle para" + "\n");
+        str.append("mkfile <soubor> – vytvoří nový soubor, jehož jméno bylo zadáno v parametru" + "\n");
+        str.append("mkdir <adresář> - vytvoří zadaný adresář" + "\n");
+        str.append("mkdirs <cesta> – vytvoří adresáře odpovídající cestě zadané v parametru" + "\n");
+        str.append("rename <jm1> <jm2> – přejmenuje soubor nebo adresář" + "\n");
+        str.append("exit - ukončí program" + "\n");
 
         return str.toString();
     }
 
-    private String mkdir(String[] commandParts) {
-        File f = new File(actualDir, commandParts[1]);
-        f.createNewFile();
-        if () {
-            
+    private String mkdir(String[] filename) throws IOException {
+        File f = new File(actualDir, filename[1]);
+        if (f.createNewFile()) {
+            return "Soubor vytvořen";
         }
+
+        return "Soubor již existuje";
     }
 }
