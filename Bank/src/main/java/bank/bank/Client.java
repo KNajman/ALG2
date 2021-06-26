@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author najma
  */
-public abstract class Client implements Comparable<Client> {
+public abstract class Client implements Comparable<Client>, NameComparator, BalanceComparator {
 
     private final String name;
     private final List<Account> accounts;

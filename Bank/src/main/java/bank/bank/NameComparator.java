@@ -6,7 +6,7 @@ import java.util.Comparator;
  *
  * @author najma
  */
-public class NameComparator {
+public interface NameComparator {
 
     public static Comparator<Client> NameComparator = (Client c1, Client c2) -> {
         String Name1 = c1.getName().toUpperCase();

@@ -6,10 +6,10 @@ import java.util.Comparator;
  *
  * @author najma
  */
-public class BalanceComparator implements Comparator<Client> {
+public interface BalanceComparator{
 
-    @Override
-    public int compare(Client c1, Client c2) {
+    
+    public static Comparator<Client> BalanceComparator = (Client c1, Client c2) -> {
         return Double.compare(c1.accountBalance(), c2.accountBalance());
     }
 ;

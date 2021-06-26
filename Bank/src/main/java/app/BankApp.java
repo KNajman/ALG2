@@ -44,20 +44,21 @@ public class BankApp {
         System.out.println("Just a list");
         List<Client> clients = new ArrayList(Arrays.asList(Pekar, Svecova, Skoda));
         printList(clients);
-        
+
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("Sorted via Comparable");        
+        System.out.println("Sorted via Comparable");
         Collections.sort(clients);
         printList(clients);
-        
+
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("Sorted via NameComparator");        
-        Collections.sort(clients);
+        System.out.println("Sorted via NameComparator");
+        Collections.sort(clients, Client.NameComparator);
         printList(clients);
-        
+
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("Sorted via BalanceComparator");        
+        System.out.println("Sorted via BalanceComparator");
         Collections.sort(clients);
+        Collections.sort(clients, Client.BalanceComparator);
         printList(clients);
 
     }
