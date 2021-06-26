@@ -10,7 +10,7 @@ public class BalanceComparator implements Comparator<Client> {
 
     @Override
     public int compare(Client c1, Client c2) {
-        return Double.compare(c1.celkovaSumaUctu(), c2.celkovaSumaUctu());
+        return Double.compare(c1.accountBalance(), c2.accountBalance());
     }
 ;
 

@@ -31,35 +31,40 @@ public class BankApp {
 
         //System.out.println(Pekar);
         System.out.println(Pekar.addressClient());
-        System.out.println(Pekar.celkovaSumaUctu());
-        System.out.println("");
+        System.out.println(Pekar.accountBalance());
+        System.out.println("------------------------------------------------------------------------");
         //System.out.println(Svecova);
         System.out.println(Svecova.addressClient());
-        System.out.println(Svecova.celkovaSumaUctu());
-        System.out.println("");
+        System.out.println(Svecova.accountBalance());
+        System.out.println("------------------------------------------------------------------------");
         //System.out.println(Skoda);
         System.out.println(Skoda.addressClient());
-        System.out.println(Skoda.celkovaSumaUctu());
-        System.out.println("");
-
+        System.out.println(Skoda.accountBalance());
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Just a list");
         List<Client> clients = new ArrayList(Arrays.asList(Pekar, Svecova, Skoda));
         printList(clients);
         
-        System.out.println("___________________________________");
-        System.out.println("Name-sorted (using Namecomparator):");
-        
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Sorted via Comparable");        
+        Collections.sort(clients);
         printList(clients);
         
-        Arrays.sort(clients);
-        //printList(clients);
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Sorted via NameComparator");        
+        Collections.sort(clients);
+        printList(clients);
         
-        
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Sorted via BalanceComparator");        
+        Collections.sort(clients);
+        printList(clients);
 
     }
 
     public static void printList(List<Client> clients) {
         clients.forEach(c -> {
-            System.out.format("%s: %.2f KC %n", c.addressClient(), c.celkovaSumaUctu());
+            System.out.format("%s: %.2f KC %n", c.addressClient(), c.accountBalance());
         });
     }
 }

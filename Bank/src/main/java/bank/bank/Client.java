@@ -2,13 +2,12 @@ package bank.bank;
 
 import java.util.List;
 import java.util.ArrayList;
-import bank.bank.NameComparator;
 
 /**
  *
  * @author najma
  */
-public abstract class Client{
+public abstract class Client implements Comparable<Client> {
 
     private final String name;
     private final List<Account> accounts;
@@ -22,7 +21,7 @@ public abstract class Client{
         this.accounts.add(new Account(amount));
     }
 
-    public double celkovaSumaUctu() {
+    public double accountBalance() {
         double sum = 0;
         sum = accounts.stream().map(account -> account.balance()).reduce(sum, (accumulator, _item) -> accumulator + _item);
         return sum;
@@ -38,5 +37,11 @@ public abstract class Client{
     public String toString() {
         return "Klient: " + name + accounts;
     }
-    
+
+    @Override
+    public int compareTo(Client c) {
+        return (int) (-this.accountBalance()+ c.accountBalance());
+    }
+;
+
 }
