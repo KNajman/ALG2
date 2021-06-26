@@ -2,15 +2,16 @@ package bank.bank;
 
 import java.util.List;
 import java.util.ArrayList;
+import bank.bank.NameComparator;
 
 /**
  *
  * @author najma
  */
-public abstract class Client {
+public abstract class Client{
 
-    private String name;
-    private List<Account> accounts;
+    private final String name;
+    private final List<Account> accounts;
 
     public Client(String name) {
         this.name = name;
@@ -37,5 +38,5 @@ public abstract class Client {
     public String toString() {
         return "Klient: " + name + accounts;
     }
-
+    
 }
