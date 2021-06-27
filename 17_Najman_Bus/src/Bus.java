@@ -5,10 +5,10 @@
  */
 public class Bus {
 
-    private int capacity=40;
-    private int lineNumber=0;
-    private String company="";
-    private int nPassengers=0;
+    private final int capacity;
+    private int lineNumber = 0;
+    private String company = "";
+    private int nPassengers = 0;
 
 //vytvořit autobus se zadaným počtem sedadel, číslem linky a názvem společnosti.
     public Bus(int pocetSedadel, int cisloLinky, String nazevSpolecnosti) {
@@ -51,24 +51,27 @@ public class Bus {
     @Override
     public String toString() {
         return "Autobus číslo " + lineNumber + " společnosti " + company
-                + " s počtem sedadel " + capacity;
+                + " s počtem sedadel " + capacity + " veze " + nPassengers;
     }
 
     /*nechat vystoupit zadaný počet cestujících.*/
-    public void outputCestujici(int cestujici) {
-        if (this.nPassengers >= cestujici) {
-            this.nPassengers -= cestujici;
+    public void outputCestujici(int vystupujici) {
+        if (this.nPassengers > vystupujici) {
+            this.nPassengers =this.nPassengers - vystupujici;
+        } else {
+            System.out.println("Vsichni vystoupili");
+            this.nPassengers = 0;
         }
-        System.out.println("Vsichni vystoupili");
-        this.nPassengers = 0;
     }
 
     /*nechat nastoupit zadaný počet cestujících.*/
-    public void inputCestujici(int cestujici) {
-        if ((this.capacity - this.nPassengers) < cestujici) {
-            this.nPassengers += cestujici;
+    public void inputCestujici(int nastupujici) {
+        int volnaMista = this.capacity - this.nPassengers;
+        if (volnaMista >= nastupujici) {
+            this.nPassengers = this.nPassengers + nastupujici;
         } else {
-            System.out.println("Je plno");
+            this.nPassengers = this.capacity;
+            System.out.println("Je plno. Nastoupilo " + volnaMista + " z " + nastupujici);
         }
     }
 
