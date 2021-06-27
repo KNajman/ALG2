@@ -1,12 +1,13 @@
-package cmd;
 
-import java.io.IOException;
-import java.util.Scanner;
+package cmd;
 
 /**
  *
- * @author JV
+ * @author najma
  */
+import java.io.IOException;
+import java.util.Scanner;
+
 public class CmdUI {
     public static Scanner sc = new Scanner(System.in);
     

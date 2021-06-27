@@ -1,11 +1,11 @@
+
 package cmd;
 
 import java.io.File;
 import java.io.FilenameFilter;
-
 /**
  *
- * @author JV
+ * @author najma
  */
 public class ExtensionFilter implements FilenameFilter{
     private String extension;
