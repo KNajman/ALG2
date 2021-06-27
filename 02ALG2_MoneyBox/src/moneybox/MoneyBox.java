@@ -2,7 +2,7 @@ package moneybox;
 
 /**
  *
- * @author JV
+ * @author najma
  */
 
 //new datatype mutable

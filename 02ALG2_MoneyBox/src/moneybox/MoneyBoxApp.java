@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author JV
+ * @author najma
  */
 public class MoneyBoxApp {
     static Scanner sc = new Scanner(System.in);
