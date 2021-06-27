@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -57,7 +52,6 @@ public class Bus {
     public String toString() {
         return "Autobus číslo " + lineNumber + " společnosti " + company
                 + " s počtem sedadel " + capacity;
-
     }
 
     /*nechat vystoupit zadaný počet cestujících.*/
@@ -76,7 +70,6 @@ public class Bus {
         } else {
             System.out.println("Je plno");
         }
-
     }
 
     /*nechat vystoupit všechny cestující.*/
